@@ -1,12 +1,13 @@
+import Guest from './components/lib/guest.js';
 
 const defaultGuests = [
-  { email: 'gangnam-style@psy.com', tickets: 1 },
-  { email: 'harlem.shake@baauer.com', tickets: 8 },
-  { email: 'black.beatles@skrillex.com', tickets: 3 },
+  new Guest('gangnam-style@psy.com', 1),
+  new Guest('harlem.shake@baauer.com', 8),
+  new Guest('black.beatles@skrillex.com', 3)
 ];
 const KEY = 'iscout-recruit-project.guests';
 
-module.exports = class GuestRepository {
+export default class GuestRepository {
   load() {
     return new Promise(resolve => {
       setTimeout(() => {

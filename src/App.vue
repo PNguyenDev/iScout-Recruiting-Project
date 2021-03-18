@@ -19,6 +19,8 @@
 <script>
 import NavBar from './components/NavBar';
 import Main from './components/Main';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
   components: {
