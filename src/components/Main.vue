@@ -105,10 +105,15 @@
         return this.guests.find(guest => { return guest.email === emailToFind });
       },
       getTotalGuestCount() {
-        return this.guests.length;
+        let numberOfGuests = 0;
+        if (this.guests && this.guests.length > 0) {
+          this.guests.forEach(guest => {
+            numberOfGuests += guest.tickets;
+          });
+        }
+        return numberOfGuests;
       },
       openGuestInfoModal(guestData) {
-        console.log(guestData);
         if(guestData === null)
           guestData = new Guest();
         this.guestToEdit = guestData;
@@ -120,6 +125,8 @@
       },
       async saveGuestRecord() {
         let gustRecordFound = this.findGuestRecord(this.guestInfoForm.email);
+        if (this.guestInfoForm.tickets !== '')
+          this.guestInfoForm.tickets = parseInt(this.guestInfoForm.tickets);
         if (gustRecordFound) {
           gustRecordFound.email = this.guestInfoForm.email;
           gustRecordFound.tickets = this.guestInfoForm.tickets;
@@ -132,6 +139,11 @@
     async created () {
       await repo.reset();
       let response = await repo.load();
+      if (response && response.length > 0) {
+        response.forEach(guest => {
+          guest.tickets = parseInt(guest.tickets);
+        });
+      }
       this.guests = response;
       this.originalGuestList = response;
     }
