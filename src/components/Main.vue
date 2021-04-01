@@ -124,7 +124,10 @@
         this.guests = this.originalGuests;
       },
       async saveGuestRecord() {
-        let gustRecordFound = this.findGuestRecord(this.guestToEdit.email);
+        let guestEmail = this.guestToEdit.email;
+        if (guestEmail === '')
+          guestEmail = this.guestInfoForm.email;
+        let gustRecordFound = this.findGuestRecord(guestEmail);
         if (this.guestInfoForm.tickets !== '')
           this.guestInfoForm.tickets = parseInt(this.guestInfoForm.tickets);
         if (gustRecordFound) {
