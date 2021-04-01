@@ -92,10 +92,10 @@
           okTitle: 'YES',
           cancelTitle: 'NO',
           centered: true,
-          bodyClass: 'text-nowrap',
           size: 'lg'
-        }).then(() => {
-            this.deleteGuestRecord(guestData.email);
+        }).then((clicked) => {
+            if (clicked === true)
+              this.deleteGuestRecord(guestData.email);
         });
       },
       deleteGuestRecord(emailToRemove) {
@@ -124,7 +124,7 @@
         this.guests = this.originalGuests;
       },
       async saveGuestRecord() {
-        let gustRecordFound = this.findGuestRecord(this.guestInfoForm.email);
+        let gustRecordFound = this.findGuestRecord(this.guestToEdit.email);
         if (this.guestInfoForm.tickets !== '')
           this.guestInfoForm.tickets = parseInt(this.guestInfoForm.tickets);
         if (gustRecordFound) {
